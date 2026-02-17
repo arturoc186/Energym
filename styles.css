@@ -1,0 +1,946 @@
+/* ============================================
+   EnerGym — Presentación Plan de Empresa
+   Estilo: Eco-Tech Dark + Green Neon
+   Formato: 8 Diapositivas Full-Screen
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Open+Sans:wght@300;400;500;600&display=swap');
+
+/* --- Variables --- */
+:root {
+    --neon: #39ff14;
+    --neon-dim: #2bcc0f;
+    --neon-glow: 0 0 10px rgba(57, 255, 20, 0.3), 0 0 40px rgba(57, 255, 20, 0.1);
+    --neon-glow-strong: 0 0 10px rgba(57, 255, 20, 0.5), 0 0 40px rgba(57, 255, 20, 0.2), 0 0 80px rgba(57, 255, 20, 0.1);
+    --bg-dark: #0f172a;
+    --bg-darker: #0a0f1c;
+    --glass-bg: rgba(255, 255, 255, 0.04);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --text-primary: #e2e8f0;
+    --text-muted: #64748b;
+    --text-dim: #94a3b8;
+    --red: #ef4444;
+    --blue: #3b82f6;
+    --amber: #f59e0b;
+    --green: #22c55e;
+}
+
+/* --- Reset & Base --- */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    background: var(--bg-dark);
+    color: var(--text-primary);
+    overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Montserrat', sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+/* =========================
+   SLIDE SYSTEM
+   ========================= */
+.slide {
+    min-height: 100vh;
+    scroll-snap-align: start;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 3rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.slide-inner {
+    max-width: 1100px;
+    width: 100%;
+    z-index: 2;
+}
+
+.slide-bg-img {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: blur(2px);
+}
+
+/* --- Slide Number Badge --- */
+.slide-number {
+    position: absolute;
+    top: 2rem;
+    left: 3rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 0.75rem;
+    color: var(--neon);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: 0.6;
+    z-index: 3;
+}
+
+/* --- Side Nav Dots --- */
+.slide-nav {
+    position: fixed;
+    right: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.slide-nav a {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+    transition: all 0.3s;
+    display: block;
+    position: relative;
+}
+
+.slide-nav a.active {
+    background: var(--neon);
+    box-shadow: var(--neon-glow);
+    transform: scale(1.3);
+}
+
+.slide-nav a:hover {
+    background: rgba(57, 255, 20, 0.5);
+}
+
+.slide-nav a .tooltip {
+    position: absolute;
+    right: 22px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(15, 23, 42, 0.95);
+    color: #fff;
+    padding: 0.3rem 0.8rem;
+    border-radius: 6px;
+    font-size: 0.7rem;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+    border: 1px solid var(--glass-border);
+}
+
+.slide-nav a:hover .tooltip {
+    opacity: 1;
+}
+
+/* --- Background effects --- */
+.bg-grid {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-image:
+        linear-gradient(rgba(57, 255, 20, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(57, 255, 20, 0.025) 1px, transparent 1px);
+    background-size: 60px 60px;
+}
+
+.bg-glow-tl {
+    position: absolute;
+    top: -20%;
+    left: -10%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(57, 255, 20, 0.06) 0%, transparent 70%);
+    z-index: 0;
+}
+
+.bg-glow-br {
+    position: absolute;
+    bottom: -20%;
+    right: -10%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(57, 255, 20, 0.04) 0%, transparent 70%);
+    z-index: 0;
+}
+
+/* =========================
+   SLIDE 1 — PORTADA
+   ========================= */
+.slide-portada {
+    text-align: center;
+}
+
+.slide-portada .hero-badge {
+    display: inline-block;
+    padding: 0.4rem 1.4rem;
+    border: 1px solid rgba(57, 255, 20, 0.3);
+    border-radius: 50px;
+    font-size: 0.8rem;
+    color: var(--neon);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: rgba(57, 255, 20, 0.05);
+    margin-bottom: 2rem;
+}
+
+.slide-portada h1 {
+    font-size: clamp(4rem, 10vw, 8rem);
+    font-weight: 900;
+    line-height: 0.95;
+    background: linear-gradient(135deg, #fff 30%, var(--neon) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.8rem;
+}
+
+.slide-portada .slogan {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+    font-weight: 600;
+    color: var(--neon);
+    text-shadow: var(--neon-glow);
+    margin-bottom: 1.5rem;
+    animation: fadeUp 1.5s ease 0.3s both;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.slide-portada .desc {
+    font-size: 1.05rem;
+    color: var(--text-dim);
+    max-width: 600px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.8;
+}
+
+/* Team row mini */
+.team-row {
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+}
+
+.team-mini {
+    text-align: center;
+}
+
+.team-mini img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(57, 255, 20, 0.3);
+    box-shadow: var(--neon-glow);
+    margin-bottom: 0.6rem;
+}
+
+.team-mini h4 {
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.team-mini p {
+    font-size: 0.75rem;
+    color: var(--neon);
+    font-weight: 600;
+}
+
+/* Contact row mini */
+.contact-row {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    font-size: 0.85rem;
+    color: var(--text-dim);
+}
+
+.contact-row span {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.contact-row i {
+    color: var(--neon);
+}
+
+/* =========================
+   GLASS CARD
+   ========================= */
+.glass {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 1rem;
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+    transition: all 0.4s ease;
+}
+
+.glass:hover {
+    border-color: rgba(57, 255, 20, 0.2);
+    box-shadow: var(--neon-glow);
+    transform: translateY(-4px);
+}
+
+/* =========================
+   COMMON SECTION HEADINGS
+   ========================= */
+.s-label {
+    color: var(--neon);
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 0.5rem;
+}
+
+.s-title {
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 0.8rem;
+    line-height: 1.15;
+}
+
+.s-subtitle {
+    color: var(--text-muted);
+    font-size: 1rem;
+    max-width: 600px;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+}
+
+.center-text {
+    text-align: center;
+}
+
+.center-text .s-subtitle {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* =========================
+   SLIDE 2 — ORIGEN + OBJETIVOS
+   ========================= */
+.origin-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.origin-card .icon-box {
+    width: 50px;
+    height: 50px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    margin-bottom: 1.2rem;
+    background: rgba(57, 255, 20, 0.1);
+    color: var(--neon);
+}
+
+.origin-card h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+}
+
+.origin-card p,
+.origin-card li {
+    color: var(--text-dim);
+    font-size: 0.92rem;
+    line-height: 1.7;
+}
+
+.origin-card li {
+    padding: 0.35rem 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+}
+
+.origin-card li i {
+    color: var(--neon);
+    margin-top: 0.25rem;
+    font-size: 0.6rem;
+}
+
+/* =========================
+   SLIDE 3 — PROBLEMA / SOLUCIÓN
+   ========================= */
+.ps-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.ps-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    margin-bottom: 1.2rem;
+}
+
+.ps-problem .ps-icon {
+    background: rgba(239, 68, 68, 0.12);
+    color: var(--red);
+}
+
+.ps-solution .ps-icon {
+    background: rgba(57, 255, 20, 0.12);
+    color: var(--neon);
+}
+
+.ps-card h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+}
+
+.ps-card li {
+    padding: 0.45rem 0;
+    color: var(--text-dim);
+    font-size: 0.92rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    line-height: 1.6;
+}
+
+.ps-card li i {
+    margin-top: 0.3rem;
+    font-size: 0.55rem;
+}
+
+.ps-problem li i {
+    color: var(--red);
+}
+
+.ps-solution li i {
+    color: var(--neon);
+}
+
+/* =========================
+   SLIDE 4 — CANALES / MERCADO
+   ========================= */
+.channels-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.channel-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+}
+
+.channel-item .ch-icon {
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(57, 255, 20, 0.1);
+    color: var(--neon);
+    font-size: 1rem;
+}
+
+.channel-item h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+}
+
+.channel-item p {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    line-height: 1.5;
+}
+
+.market-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.stat-box {
+    text-align: center;
+    padding: 1.2rem;
+}
+
+.stat-box .stat-num {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 2rem;
+    color: var(--neon);
+    text-shadow: var(--neon-glow);
+}
+
+.stat-box .stat-label {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-top: 0.3rem;
+}
+
+/* =========================
+   SLIDE 5 — COMPETENCIA / ALIANZAS
+   ========================= */
+.comp-grid {
+    display: grid;
+    grid-template-columns: 1fr 80px 1fr;
+    gap: 0;
+    align-items: stretch;
+}
+
+.comp-vs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 1.4rem;
+    color: #1e293b;
+}
+
+.comp-card h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.comp-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    font-size: 0.88rem;
+}
+
+.comp-item:last-child {
+    border-bottom: none;
+}
+
+.comp-label {
+    color: var(--text-muted);
+}
+
+.comp-value {
+    font-weight: 600;
+}
+
+.comp-bad .comp-value {
+    color: var(--red);
+}
+
+.comp-good .comp-value {
+    color: var(--neon);
+}
+
+.alliances-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.alliance-card {
+    text-align: center;
+    padding: 1.5rem 1rem;
+}
+
+.alliance-card i {
+    font-size: 1.8rem;
+    color: var(--neon);
+    margin-bottom: 0.8rem;
+}
+
+.alliance-card h4 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+}
+
+.alliance-card p {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+}
+
+/* =========================
+   SLIDE 6 — PLAN FINANCIERO
+   ========================= */
+.finance-flex {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    align-items: start;
+}
+
+.fin-bar-group {
+    margin-bottom: 1.2rem;
+}
+
+.fin-bar-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.4rem;
+    font-size: 0.85rem;
+}
+
+.fin-bar-label span:last-child {
+    color: var(--neon);
+    font-weight: 600;
+}
+
+.fin-bar {
+    height: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.fin-bar-fill {
+    height: 100%;
+    border-radius: 10px;
+    background: linear-gradient(90deg, var(--neon-dim), var(--neon));
+    box-shadow: var(--neon-glow);
+    width: 0;
+    transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fin-kpi-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.fin-kpi {
+    padding: 1.2rem;
+    text-align: center;
+}
+
+.fin-kpi .kpi-val {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--neon);
+}
+
+.fin-kpi .kpi-label {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-top: 0.3rem;
+}
+
+/* =========================
+   SLIDE 7 — FINANCIACIÓN
+   ========================= */
+.funding-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.funding-card {
+    text-align: center;
+}
+
+.funding-card .fund-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    margin: 0 auto 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+}
+
+.funding-card h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.funding-card .fund-amount {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--neon);
+    text-shadow: var(--neon-glow);
+    margin-bottom: 0.5rem;
+}
+
+.funding-card p {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    line-height: 1.6;
+}
+
+.funding-total {
+    margin-top: 2rem;
+    text-align: center;
+    padding: 2rem;
+}
+
+.funding-total .total-label {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 0.3rem;
+}
+
+.funding-total .total-val {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3rem;
+    font-weight: 900;
+    color: #fff;
+}
+
+.funding-total .total-val span {
+    color: var(--neon);
+}
+
+/* =========================
+   SLIDE 8 — CONCLUSIONES
+   ========================= */
+.slide-conclusion {
+    text-align: center;
+}
+
+.conclusion-points {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.conc-point {
+    padding: 2rem 1.5rem;
+    text-align: center;
+}
+
+.conc-point i {
+    font-size: 2rem;
+    color: var(--neon);
+    margin-bottom: 1rem;
+    text-shadow: var(--neon-glow);
+}
+
+.conc-point h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.conc-point p {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    line-height: 1.6;
+}
+
+.thanks {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 900;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #fff 30%, var(--neon) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.thanks-sub {
+    color: var(--text-muted);
+    font-size: 1rem;
+    margin-bottom: 2rem;
+}
+
+.thanks-contact {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    font-size: 0.85rem;
+    color: var(--text-dim);
+}
+
+.thanks-contact span {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.thanks-contact i {
+    color: var(--neon);
+}
+
+.copyright {
+    margin-top: 3rem;
+    font-size: 0.75rem;
+    color: #1e293b;
+}
+
+/* =========================
+   SCROLL ANIMATIONS
+   ========================= */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reveal-d1 {
+    transition-delay: 0.1s;
+}
+
+.reveal-d2 {
+    transition-delay: 0.2s;
+}
+
+.reveal-d3 {
+    transition-delay: 0.3s;
+}
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+@media (max-width: 768px) {
+    .slide {
+        padding: 3rem 1.5rem;
+    }
+
+    .slide-number {
+        top: 1rem;
+        left: 1.5rem;
+    }
+
+    .slide-nav {
+        right: 0.8rem;
+        gap: 0.6rem;
+    }
+
+    .slide-nav a {
+        width: 8px;
+        height: 8px;
+    }
+
+    .slide-nav a .tooltip {
+        display: none;
+    }
+
+    .origin-grid,
+    .ps-grid,
+    .channels-grid,
+    .finance-flex,
+    .funding-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .comp-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .comp-vs {
+        padding: 0.5rem 0;
+    }
+
+    .alliances-row,
+    .conclusion-points {
+        grid-template-columns: 1fr;
+    }
+
+    .market-stats {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .fin-kpi-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .team-row {
+        gap: 1.5rem;
+    }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-dark);
+}
+
+::-webkit-scrollbar-thumb {
+    background: #1e293b;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--neon-dim);
+}
